@@ -19,7 +19,7 @@
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
-        "miragesoft/basicfilemanager": "dev-master",
+        "miragesoft/yii2-basicfilemanager": "dev-master",
         "dmstr/yii2-adminlte-asset": "2.*"
     },
     "autoload": {
