@@ -62,3 +62,34 @@ Yii::$app->user->isGuest ?
         'linkOptions' => ['data-method' => 'post']],
 ['label' => 'Register', 'url' => ['/user/regist/signup'], 'visible' => Yii::$app->user->isGuest]
 ```
+
+## Another modules call user information
+
+You can add links to registration, login and logout as follows:
+```php
+$userModule = new \mirage\user\api\User(['moduleId' => 'user']);
+print_r($userModule->userInfo());
+```
+
+Example Result
+```html
+stdClass Object
+(
+    [id] => 1
+    [username] => admin
+    [created_at] => 1463204071
+    [updated_at] => 1463540422
+    [firstname] => Mirage
+    [lastname] => Studio
+    [fullname] => Mirage Studio
+    [avatar] => /uploads/user/1/avatar/mirage-avatar.jpg
+    [cover] => /uploads/user/1/cover/mirage-cover.jpg
+    [bio] => 'Thailand'
+    [data] => 
+    [roles] => Array
+        (
+            [0] => no roles
+        )
+
+)
+```
