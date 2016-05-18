@@ -66,9 +66,9 @@ class Profile extends \yii\db\ActiveRecord
     
     public function info()
     {
-        $userDir = Yii::$app->homeUrl.'uploads/user/'.Yii::$app->user->id;
-        $avatar = $userDir.'/avatar/'.$this->avatar;
-        $cover = $userDir.'/cover/'.$this->cover;
+        $userUploadDir = Yii::$app->homeUrl.'uploads/user/'.Yii::$app->user->id;
+        $avatar = $userUploadDir.'/avatar/'.$this->avatar;
+        $cover = $userUploadDir.'/cover/'.$this->cover;
         return (object)[
             'id' => $this->user_id,
             'firstname' => $this->firstname,

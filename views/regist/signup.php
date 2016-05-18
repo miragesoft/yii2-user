@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $this->params['bodyClass'] = 'hold-transition register-page';
 ?>
 <?php
-//echo $this->context->module->userDir;
+//echo $this->context->module->userUploadDir;
 ?>
 <div class="register-box">
     <div class="register-logo">

@@ -9,7 +9,9 @@ use yii\helpers\Url;
  */
 class UserModule extends \yii\base\Module
 {
-    public $userDir = '@webroot/uploads/user';
+    public $userUploadDir = '@webroot/uploads/user';
+
+    public $userUploadUrl = '';
 
     public $admins = [];
     /**
@@ -34,8 +36,8 @@ class UserModule extends \yii\base\Module
         Yii::$app->mailer->viewPath = '@mirage/user/mail';
         // custom initialization code goes here
 
-        if(substr($this->userDir, 0, 1) === '@'){
-            $this->userDir = Yii::getAlias($this->userDir);
+        if(substr($this->userUploadDir, 0, 1) === '@'){
+            $this->userUploadDir = Yii::getAlias($this->userUploadDir);
         }
 
         Yii::$app->errorHandler->errorAction = '/'.$this->id.'/default/error';

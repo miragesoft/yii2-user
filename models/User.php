@@ -255,7 +255,7 @@ class User extends ActiveRecord implements IdentityInterface
         $profile = Profile::findOne(['user_id' => $this->id]);
         $profile->delete();
 
-        $removeDir = rtrim(Yii::$app->controller->module->userDir, '/').'/'.$this->id;
+        $removeDir = rtrim(Yii::$app->controller->module->userUploadDir, '/').'/'.$this->id;
         FileHelper::removeDirectory($removeDir);
 
         parent::afterDelete();
@@ -265,7 +265,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function prepareUserDir()
     {
-        $baseDir = rtrim(Yii::$app->controller->module->userDir, '/').'/'.$this->id;
+        $baseDir = rtrim(Yii::$app->controller->module->userUploadDir, '/').'/'.$this->id;
         $dirs = ['avatar','cover',];
         foreach ($dirs as $key => $dir) {
             FileHelper::createDirectory($baseDir.'/'.$dir);

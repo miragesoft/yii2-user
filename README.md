@@ -31,7 +31,7 @@ Config
         ...
         'user' => [
             'class' => 'mirage\user\UserModule',
-            'userDir' => '@webroot/uploads/user', //base user upload directory
+            'userUploadDir' => '@webroot/uploads/user', //base user upload directory
             'admins' => ['admin', 'mirage'], //Username for CRUD user 
         ],
         ...
