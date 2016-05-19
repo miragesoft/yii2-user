@@ -5,10 +5,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?= $userModel->info()->avatar ?>" class="img-circle" alt="User Image"/>
+                <img src="<?= $userApi->info->avatar ?>" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p><?= $userModel->info()->fullname ?></p>
+                <p><?= $userApi->info->fullname ?></p>
 
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
@@ -43,6 +43,7 @@
                         ],
                     ],
                     ['label' => 'Admin', 'icon' => 'fa fa-users', 'url' => ['admin/index']],
+                    ['label' => 'RBAC', 'icon' => 'fa fa-filter', 'url' => $this->context->module->rbacUrl],
                     /*['label' => 'Account', 'icon' => 'fa fa-adn', 'url' => ['/debug']],
                     ['label' => 'Login', 'url' => ['auth/login'], 'visible' => Yii::$app->user->isGuest],
                     [

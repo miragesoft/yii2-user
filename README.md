@@ -65,31 +65,62 @@ Yii::$app->user->isGuest ?
 
 ## Another modules call user information
 
-You can add links to registration, login and logout as follows:
 ```php
-$userModule = new \mirage\user\api\User(['moduleId' => 'user']);
-print_r($userModule->userInfo());
+$userObj = new $this->userModuleClass(['moduleId' => 'user']);
+$userApi = (object)['data'=>$userObj->userData(), 'info'=>$userObj->userInfo()];
+print_r($userApi);
+echo '<hr />';
+echo 'Fullname: '.$userApi->info->fullname;
 ```
 
 Example Result
 ```html
 stdClass Object
 (
-    [id] => 1
-    [username] => admin
-    [created_at] => 1463204071
-    [updated_at] => 1463540422
-    [firstname] => Mirage
-    [lastname] => Studio
-    [fullname] => Mirage Studio
-    [avatar] => /uploads/user/1/avatar/mirage-avatar.jpg
-    [cover] => /uploads/user/1/cover/mirage-cover.jpg
-    [bio] => 'Thailand'
-    [data] => 
-    [roles] => Array
+    [data] => stdClass Object
         (
-            [0] => no roles
+            [id] => 1
+            [username] => admin
+            [created_at] => 1463562063
+            [updated_at] => 1463562063
+            [firstname] => Mirage
+            [lastname] => Studio
+            [fullname] => Mirage Studio
+            [avatar] => avatar-img.jpg
+            [cover] => 
+            [bio] => 
+            [data] => 
+            [roles] => Array
+                (
+                )
+
+        )
+
+    [info] => stdClass Object
+        (
+            [id] => 1
+            [username] => admin
+            [created_at] => 1463562063
+            [updated_at] => 1463562063
+            [firstname] => Mirage
+            [lastname] => Studio
+            [fullname] => Mirage Studio
+            [avatar] => /uploads/user/1/avatar/avatar-img.jpg
+            [cover] => /assets/c5f36f99/images/default-cover.jpg
+            [bio] => Not set
+            [data] => Not set
+            [roles] => Array
+                (
+                    [0] => stdClass Object
+                        (
+                            [name] => 
+                        )
+
+                )
+
         )
 
 )
+<hr />
+Fullname: Mirage Studio
 ```

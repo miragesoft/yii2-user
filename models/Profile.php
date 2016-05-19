@@ -110,6 +110,9 @@ class Profile extends \yii\db\ActiveRecord
 
 
     public function getFullName() {
+        if($this->firstname === null && $this->lastname === null){
+            return null;
+        }
         return $this->firstname . ' ' . $this->lastname;
     }
 }

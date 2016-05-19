@@ -14,6 +14,10 @@ class UserModule extends \yii\base\Module
     public $userUploadUrl = '';
 
     public $admins = [];
+
+    public $rbacUrl = ['/rbac'];
+
+    public $userApi;
     /**
      * @inheritdoc
      */
@@ -34,13 +38,16 @@ class UserModule extends \yii\base\Module
         $this->params();
 
         Yii::$app->mailer->viewPath = '@mirage/user/mail';
-        // custom initialization code goes here
 
         if(substr($this->userUploadDir, 0, 1) === '@'){
             $this->userUploadDir = Yii::getAlias($this->userUploadDir);
         }
 
         Yii::$app->errorHandler->errorAction = '/'.$this->id.'/default/error';
+
+        $userObj = new \mirage\user\api\User();
+        $userObj->userModule = $this;
+        $this->userApi = (object)['data'=>$userObj->userData(), 'info'=>$userObj->userInfo()];
     }
 
     public function params()

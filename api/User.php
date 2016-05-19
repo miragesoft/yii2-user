@@ -4,7 +4,7 @@ namespace mirage\user\api;
 * 
 */
 use Yii;
-use mirage\user\UserModule;
+//use mirage\user\UserModule;
 use mirage\user\models\User as UserModel;
 
 
@@ -12,19 +12,22 @@ class User
 {
 	public $userModule = '';
 
-	public function __construct($config)
+	private $user;
+
+	public function __construct($config=[])
 	{
-		$this->userModule = Yii::$app->getModule($config['moduleId']);
-	}
-	
-	public function userInfo()
-	{
-		$user = UserModel::findOne(Yii::$app->user->id);
-		$userUploadPath = $this->userModule->userUploadDir.'/'.$user->id;
-		$roles = ['no roles'];
-		if(Yii::$app->authManager !== null){
-			$roles = Yii::$app->authManager->getRoles($user->id);
+		if(isset($config['moduleId'])){
+			$this->userModule = Yii::$app->getModule($config['moduleId']);
 		}
+		$this->user = UserModel::findOne(Yii::$app->user->id);
+		$view = Yii::$app->getView();
+		\mirage\user\assets\UserAsset::register($view);
+	}
+
+	public function userData()
+	{
+		$user = $this->user;
+		
         return (object)[
             'id' => Yii::$app->user->id,
             'username' => Yii::$app->user->identity->username,
@@ -33,12 +36,31 @@ class User
             'firstname' => $user->profile->firstname,
             'lastname' => $user->profile->lastname,
             'fullname' => $user->profile->fullname,
-            'avatar' => $this->path2url($userUploadPath.'/avatar/'.$user->profile->avatar),
-            'cover' => $this->path2url($userUploadPath.'/cover/'.$user->profile->cover),
+            'avatar' => $user->profile->avatar,
+            'cover' => $user->profile->cover,
             'bio' => $user->profile->bio,
             'data' => $user->profile->data,
-            'roles' => $roles,
+            'roles' => Yii::$app->authManager->getRoles($user->id),
         ];
+	}
+	
+	public function userInfo()
+	{
+		$userData = $this->userData();
+
+		$user = $this->user;
+		$userUploadPath = $this->userModule->userUploadDir.'/'.$user->id;
+
+		$userData->firstname = $this->verifyValue($userData->firstname);
+		$userData->lastname = $this->verifyValue($userData->lastname);
+		$userData->fullname = $this->verifyValue($userData->fullname);
+		$userData->avatar = $this->verifyImage($userUploadPath.'/avatar/'.$userData->avatar, 'default-avatar.jpg');
+		$userData->cover = $this->verifyImage($userUploadPath.'/cover/'.$userData->cover, 'default-cover.jpg');
+		$userData->bio = $this->verifyValue($userData->bio);
+		$userData->data = $this->verifyValue($userData->data);
+		$userData->roles = (count($userData->roles) > 0) ? $userData->roles : [(object)['name' => null]];
+
+		return $userData;
 	}
 
 	private function path2url($file)
@@ -47,5 +69,21 @@ class User
 		$url .= $this->userModule->userUploadUrl;
 		$url .= str_replace(Yii::getAlias('@webroot/'), '', $file);
 		return $url;
+	}
+
+	private function verifyValue($val)
+	{
+		return ($val === null) ? 'Not set' : $val;
+	}
+
+	private function verifyImage($val, $defaultImage = 'no-image.jpg')
+	{
+		$assetDir = Yii::$app->assetManager->getPublishedUrl('@mirage/user/client');
+
+		if(is_file($val)){
+			return $this->path2url($val);
+		}
+		//return $this->path2url(dirname(dirname($val)).'/'.$defaultImage);
+		return $assetDir.'/images/'.$defaultImage;
 	}
 }

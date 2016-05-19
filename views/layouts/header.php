@@ -229,18 +229,18 @@ use yii\helpers\Html;
                 */ ?>
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?= $userModel->info()->avatar ?>" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs"><?= $userModel->info()->fullname ?></span>
+                        <img src="<?= $userApi->info->avatar ?>" class="user-image" alt="User Image"/>
+                        <span class="hidden-xs"><?= $userApi->info->fullname ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="<?= $userModel->info()->avatar ?>" class="img-circle"
+                            <img src="<?= $userApi->info->avatar ?>" class="img-circle"
                                  alt="User Image"/>
 
                             <p>
-                                <?= $userModel->info()->fullname ?> - Web Developer
-                                <small>Member since <?= Yii::$app->formatter->asDate($userModel->info()->user->created_at, 'php:M Y') ?></small>
+                                <?= $userApi->info->fullname ?> - Web Developer
+                                <small>Member since <?= Yii::$app->formatter->asDate($userApi->info->created_at, 'php:M Y') ?></small>
                             </p>
                         </li>
                         <!-- Menu Body -->

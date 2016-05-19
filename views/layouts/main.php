@@ -40,21 +40,22 @@ if (Yii::$app->controller->action->id === 'login') {
     <body class="hold-transition skin-purple sidebar-mini">
     <?php $this->beginBody() ?>
     <div class="wrapper">
+        <?php $userApi = $this->context->module->userApi; ?>
 
         <?= $this->render(
             'header.php',
-            ['directoryAsset' => $directoryAsset, 'userModel' => $userModel]
+            ['directoryAsset' => $directoryAsset, 'userApi' => $userApi]
         ) ?>
 
         <?= $this->render(
             'left.php',
-            ['directoryAsset' => $directoryAsset, 'userModel' => $userModel]
+            ['directoryAsset' => $directoryAsset, 'userApi' => $userApi]
         )
         ?>
 
         <?= $this->render(
             'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset, 'userModel' => $userModel]
+            ['content' => $content, 'directoryAsset' => $directoryAsset, 'userApi' => $userApi]
         ) ?>
 
     </div>
