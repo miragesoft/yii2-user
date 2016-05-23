@@ -1,11 +1,11 @@
 {
-    "name": "yeesoft/yii2-yee-user",
-    "description": "User Module For Yee CMS",
+    "name": "miragesoft/yii2-user",
+    "description": "Yii 2 User with original user table of advanced template",
     "license": "Apache-2.0",
     "authors": [
         {
-            "name": "Taras Makitra",
-            "email": "makitrataras@gmail.com"
+            "name": "Mirage Studio",
+            "email": "miragesyudioth@gmail.com"
         }
     ],
     "require": {
