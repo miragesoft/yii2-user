@@ -1,21 +1,38 @@
 {
     "name": "miragesoft/yii2-user",
-    "description": "Yii 2 User with original user table of advanced template",
-    "license": "Apache-2.0",
+    "version": "dev-master",
+    "description": "Yii 2 user authentication module",
+    "keywords": ["yii", "yii2", "user", "auth", "authentication"],
+    "homepage": "https://github.com/miragesoft/yii2-user",
+    "type": "yii2-extension",
+    "license": "GPL-3.0",
+    "minimum-stability": "stable",
+    "support": {
+        "source": "https://github.com/miragesoft/yii2-user.git",
+        "issues": "https://github.com/miragesoft/yii2-user/issues"
+    },
     "authors": [
         {
-            "name": "Mirage Studio",
-            "email": "miragesyudioth@gmail.com"
+            "name": "Mirage Studio TH",
+            "email": "miragestudioth@gmail.com",
+            "role" : "Developer"
         }
     ],
     "require": {
         "php": ">=5.4.0",
         "yiisoft/yii2": "*",
-        "dmstr/yii2-adminlte-asset": "2.*"
+        "dmstr/yii2-adminlte-asset": "2.*",
+        "miragesoft/yii2-basicfilemanager": "*"
     },
     "autoload": {
         "psr-4": {
             "mirage\\user\\": ""
+        }
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
         }
     }
 }
