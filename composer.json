@@ -4,7 +4,7 @@
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
     "license": "GPL-3.0",
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "support": {
         "source": "https://github.com/miragesoft/yii2-user.git",
         "issues": "https://github.com/miragesoft/yii2-user/issues"
